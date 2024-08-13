@@ -14,7 +14,7 @@ struct ContentView: View {
     
     @State var selectedTheme = "Animal"
     @State var cachedEmojis: [String] = []
-    @State var cardCount = 6
+    @State var themeColor: Color = .red
     
     var body: some View {
         VStack {
@@ -40,31 +40,46 @@ struct ContentView: View {
     }
     
     func createShuffledPairs(from emojis: [String]) -> [String] {
-        let cardPairs = emojis.flatMap { [$0, $0] }
+        let randomEmojis = emojis.shuffled()[0...Int.random(in: 1..<emojis.count)]
+        let cardPairs = randomEmojis.flatMap { [$0, $0] }
         return cardPairs.shuffled()
     }
 
     func updateCachedEmojis() {
         switch selectedTheme {
-        case "Animal":
-            cachedEmojis = createShuffledPairs(from: animalEmoji)
         case "Person":
             cachedEmojis = createShuffledPairs(from: personEmoji)
+            themeColor = .blue
         case "Climate":
             cachedEmojis = createShuffledPairs(from: climateEmoji)
+            themeColor = .green
         default:
             cachedEmojis = createShuffledPairs(from: animalEmoji)
+            themeColor = .red
         }
     }
     
+    // Calculate the number of columns for the grid based on the card count
+    private func adaptiveGridItemColumns() -> [GridItem] {
+        let width = UIScreen.main.bounds.width
+        let optimalWidth = widthThatBestFits(cardCount: cachedEmojis.count, screenWidth: width)
+        return [GridItem(.adaptive(minimum: optimalWidth))]
+    }
+    
+    // Calculate the best fitting card width based on the number of cards and screen width
+    private func widthThatBestFits(cardCount: Int, screenWidth: CGFloat) -> CGFloat {
+        let baseWidth: CGFloat = screenWidth / CGFloat(sqrt(Double(cardCount))) - 10
+        return max(65, baseWidth)
+    }
+    
     var cards: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 64))]) {
+        LazyVGrid(columns: adaptiveGridItemColumns()) {
             ForEach(0..<cachedEmojis.count, id: \.self) { index in
                 CardView(content: cachedEmojis[index])
                     .aspectRatio(2/3, contentMode: .fit)
             }
         }
-        .foregroundStyle(.red)
+        .foregroundStyle(themeColor)
     }
     
     var cardThemeAdjusters: some View {
@@ -88,12 +103,12 @@ struct ContentView: View {
             VStack(spacing: 4) {
                 Image(systemName: symbol)
                     .imageScale(.large)
-                    .font(.largeTitle)
+                    .font(.title)
                 Text(title)
-                    .font(.body)
+                    .font(.caption)
             }
         })
-        .frame(minWidth: 80)
+        .frame(minWidth: 32)
     }
     
     var animalThemeChanger: some View {
