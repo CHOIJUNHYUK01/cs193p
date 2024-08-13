@@ -12,9 +12,17 @@ struct ContentView: View {
     let personEmoji = ["🧑‍🎄", "🧑‍✈️", "🧑‍🚒", "👩‍🎓", "👨‍🍳", "👨‍🌾", "👨‍🎤", "💂‍♂️", "🕵️"]
     let climateEmoji = ["🌪️", "☀️", "🌤️", "🌧️", "❄️", "🌊"]
     
+    // Device orientation is monitored using Environment's size classes
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    
     @State var selectedTheme = "Animal"
     @State var cachedEmojis: [String] = []
     @State var themeColor: Color = .red
+    
+    private var isPortrait: Bool {
+        horizontalSizeClass == .compact && verticalSizeClass == .regular
+    }
     
     var body: some View {
         VStack {
@@ -23,8 +31,9 @@ struct ContentView: View {
             ScrollView {
                 cards
             }
+            .scrollDisabled(isPortrait)
             Spacer()
-            cardThemeAdjusters
+            cardThemeChangers
         }
         .padding()
         .onAppear {
@@ -41,10 +50,10 @@ struct ContentView: View {
     
     func createShuffledPairs(from emojis: [String]) -> [String] {
         let randomEmojis = emojis.shuffled()[0...Int.random(in: 1..<emojis.count)]
-        let cardPairs = randomEmojis.flatMap { [$0, $0] }
+        let cardPairs = randomEmojis + randomEmojis
         return cardPairs.shuffled()
     }
-
+    
     func updateCachedEmojis() {
         switch selectedTheme {
         case "Person":
@@ -68,8 +77,13 @@ struct ContentView: View {
     
     // Calculate the best fitting card width based on the number of cards and screen width
     private func widthThatBestFits(cardCount: Int, screenWidth: CGFloat) -> CGFloat {
-        let baseWidth: CGFloat = screenWidth / CGFloat(sqrt(Double(cardCount))) - 10
-        return max(65, baseWidth)
+        let baseWidth: CGFloat = screenWidth / CGFloat(ceil(sqrt(Double(cardCount))) + 1)
+        
+        if isPortrait {
+            return max(64, baseWidth)
+        } else {
+            return 64
+        }
     }
     
     var cards: some View {
@@ -82,45 +96,45 @@ struct ContentView: View {
         .foregroundStyle(themeColor)
     }
     
-    var cardThemeAdjusters: some View {
+    var cardThemeChangers: some View {
         HStack {
             Spacer()
             Spacer()
-            animalThemeChanger
+            animalThemeSetter
             Spacer()
-            personThemeChanger
+            personThemeSetter
             Spacer()
-            climateThemeChanger
+            climateThemeSetter
             Spacer()
             Spacer()
         }
     }
     
-    func cardThemeAdjuster(name title: String, symbol: String) -> some View {
+    func cardThemeChanger(to label: String, symbol: String) -> some View {
         Button(action: {
-            updateTheme(to: title)
+            updateTheme(to: label)
         }, label: {
             VStack(spacing: 4) {
                 Image(systemName: symbol)
                     .imageScale(.large)
                     .font(.title)
-                Text(title)
+                Text(label)
                     .font(.caption)
             }
         })
         .frame(minWidth: 32)
     }
     
-    var animalThemeChanger: some View {
-        cardThemeAdjuster(name: "Animal", symbol: "dog.circle")
+    var animalThemeSetter: some View {
+        cardThemeChanger(to: "Animal", symbol: "dog.circle")
     }
     
-    var personThemeChanger: some View {
-        cardThemeAdjuster(name: "Person", symbol: "person.circle")
+    var personThemeSetter: some View {
+        cardThemeChanger(to: "Person", symbol: "person.circle")
     }
     
-    var climateThemeChanger: some View {
-        cardThemeAdjuster(name: "Climate", symbol: "cloud.circle")
+    var climateThemeSetter: some View {
+        cardThemeChanger(to: "Climate", symbol: "cloud.circle")
     }
 }
 
