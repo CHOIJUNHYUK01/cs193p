@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class EmojiMemoryGame {
+class EmojiMemoryGame: ObservableObject {
     private static let animalEmoji = ["🐶", "🦊", "🐸", "🐥", "🦁", "🐭", "🐧", "🦉", "🐯", "🦄", "🐷", "🐺"]
     private static let personEmoji = ["🧑‍🎄", "🧑‍✈️", "🧑‍🚒", "👩‍🎓", "👨‍🍳", "👨‍🌾", "👨‍🎤", "💂‍♂️", "🕵️"]
     private static let climateEmoji = ["🌪️", "☀️", "🌤️", "🌧️", "❄️", "🌊"]
@@ -22,10 +22,15 @@ class EmojiMemoryGame {
         }
     }
     
-    private var model = createMemoryGame()
+    @Published private var model = createMemoryGame()
     
     var cards: Array<MemoryGame<String>.Card> {
         return model.cards
+    }
+    
+    // MARK: Intents
+    func shuffle() {
+        model.shuffle()
     }
     
     func choose(_ card: MemoryGame<String>.Card) {
