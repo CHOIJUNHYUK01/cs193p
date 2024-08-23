@@ -7,18 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		51757F292C68EA9D0028B5AB /* project_1App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51757F282C68EA9D0028B5AB /* project_1App.swift */; };
-		51757F2B2C68EA9D0028B5AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51757F2A2C68EA9D0028B5AB /* ContentView.swift */; };
+		51757F292C68EA9D0028B5AB /* MemorizaGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51757F282C68EA9D0028B5AB /* MemorizaGameApp.swift */; };
+		51757F2B2C68EA9D0028B5AB /* MemorizeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51757F2A2C68EA9D0028B5AB /* MemorizeGameView.swift */; };
 		51757F2D2C68EA9F0028B5AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51757F2C2C68EA9F0028B5AB /* Assets.xcassets */; };
 		51757F302C68EA9F0028B5AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51757F2F2C68EA9F0028B5AB /* Preview Assets.xcassets */; };
+		519EC65B2C78AC27000EB4E7 /* MemorizeGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519EC65A2C78AC27000EB4E7 /* MemorizeGameModel.swift */; };
+		519EC65D2C78AC37000EB4E7 /* MemorizeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519EC65C2C78AC37000EB4E7 /* MemorizeGame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		51757F252C68EA9D0028B5AB /* project_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		51757F282C68EA9D0028B5AB /* project_1App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = project_1App.swift; sourceTree = "<group>"; };
-		51757F2A2C68EA9D0028B5AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		51757F282C68EA9D0028B5AB /* MemorizaGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizaGameApp.swift; sourceTree = "<group>"; };
+		51757F2A2C68EA9D0028B5AB /* MemorizeGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeGameView.swift; sourceTree = "<group>"; };
 		51757F2C2C68EA9F0028B5AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51757F2F2C68EA9F0028B5AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		519EC65A2C78AC27000EB4E7 /* MemorizeGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeGameModel.swift; sourceTree = "<group>"; };
+		519EC65C2C78AC37000EB4E7 /* MemorizeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +55,10 @@
 		51757F272C68EA9D0028B5AB /* project_1 */ = {
 			isa = PBXGroup;
 			children = (
-				51757F282C68EA9D0028B5AB /* project_1App.swift */,
-				51757F2A2C68EA9D0028B5AB /* ContentView.swift */,
+				51757F282C68EA9D0028B5AB /* MemorizaGameApp.swift */,
+				51757F2A2C68EA9D0028B5AB /* MemorizeGameView.swift */,
+				519EC65A2C78AC27000EB4E7 /* MemorizeGameModel.swift */,
+				519EC65C2C78AC37000EB4E7 /* MemorizeGame.swift */,
 				51757F2C2C68EA9F0028B5AB /* Assets.xcassets */,
 				51757F2E2C68EA9F0028B5AB /* Preview Content */,
 			);
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51757F2B2C68EA9D0028B5AB /* ContentView.swift in Sources */,
-				51757F292C68EA9D0028B5AB /* project_1App.swift in Sources */,
+				519EC65B2C78AC27000EB4E7 /* MemorizeGameModel.swift in Sources */,
+				519EC65D2C78AC37000EB4E7 /* MemorizeGame.swift in Sources */,
+				51757F2B2C68EA9D0028B5AB /* MemorizeGameView.swift in Sources */,
+				51757F292C68EA9D0028B5AB /* MemorizaGameApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
