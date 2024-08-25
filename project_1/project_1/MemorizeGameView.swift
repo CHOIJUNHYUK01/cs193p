@@ -27,13 +27,13 @@ struct MemorizeGameView: View {
                     viewModel.shuffle()
                 }, label: {
                     Text("Shuffle")
-                        .frame(minWidth: 120)
+                        .frame(maxWidth: .infinity)
                 })
                 Spacer()
                 
                 Text("\(viewModel.score)")
                     .font(.title.bold())
-                    .frame(maxWidth: 120)
+                    .frame(maxWidth: .infinity)
                 
                 Spacer()
                 
@@ -41,7 +41,7 @@ struct MemorizeGameView: View {
                     viewModel.newGame()
                 }, label: {
                     Text("New Game")
-                        .frame(minWidth: 120)
+                        .frame(maxWidth: .infinity)
                 })
             }
         }
